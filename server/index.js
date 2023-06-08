@@ -7,12 +7,18 @@ const cors = require("cors");
 const bcrypt = require("bcrypt");
 require("dotenv").config();
 
-const uri =
-  "mongodb+srv://ayushpawar:mypassword@humming.av5jlgg.mongodb.net/?retryWrites=true&w=majority";
+const uri = "mongodb://localhost:27017";
 
 const app = express();
 app.use(cors());
 app.use(express.json());
+
+// how to check is connect to mongodb or not
+MongoClient.connect(uri, function (err, db) {
+  if (err) throw err;
+  console.log("Database created!");
+  db.close();
+});
 
 // Default
 app.get("/", (req, res) => {
